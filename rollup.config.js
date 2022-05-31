@@ -11,12 +11,5 @@ module.exports = {
     },
     plugins: [
         typescript() ,
-        copy({
-            targets: [
-                'src/www/index.html',
-                'src/www/style.css'
-            ],
-            outputFolder:'docs'
-        })
     ]
 };

@@ -7,7 +7,7 @@
     "pretest": "tsc --target es5 --outDir ./.tmp test/index.ts",
     "test": "npm run pretest && jasmine ./.tmp/test/index.js",
     "build": "rollup -c",
-    "start": "http-server ./docs -o --cors",
+    "start": "ts-node ./src/index.ts",
     "watch": "rollup -c -w"
   },
   "author": "Stefan Huber",
@@ -19,7 +19,8 @@
     "rollup": "^1.10.0",
     "rollup-plugin-copy": "^1.1.0",
     "rollup-plugin-typescript": "^1.0.1",
+    "ts-node": "^10.8.0",
     "tslib": "^1.9.3",
-    "typescript": "^3.4.3"
+    "typescript": "^3.9.10"
   }
 }
