@@ -5,6 +5,7 @@ import { AbstractFactory } from "./patterns/creational/abstract-factory/Abstract
 import {FactoryProvider} from "./patterns/creational/abstract-factory/FactoryProvider";
 import {Card} from "./patterns/creational/abstract-factory/Card";
 import {PaymentMethod} from "./patterns/creational/abstract-factory/PaymentMethod";
+import {Card as CardB, CardBuilder} from "./patterns/creational/builder/Card";
 
 function factoryMethod() : void {
     let payment : Payment = PaymentFactory.buildPayment(TypePayment.CARD);
@@ -20,5 +21,18 @@ function abstractFactoryMethod() : void {
     console.log(`Payment method: ${paymentMethod.doPayment()}`)
 }
 
-factoryMethod();
-abstractFactoryMethod();
+function builderPattern() : void {
+    let card : CardB = new CardBuilder("VISA", "1111 2222 3333 4444")
+        .setName("John Doe")
+        .setExpires(2033)
+        .setCredit(false)
+        .build();
+    console.log(card);
+
+    let card1 : CardB = new CardBuilder("MASTERCARD", "1111 3333 2222 4444").build();
+    console.log(card1)
+}
+
+//factoryMethod();
+//abstractFactoryMethod();
+builderPattern();
