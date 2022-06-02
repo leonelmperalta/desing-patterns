@@ -6,6 +6,8 @@ import {FactoryProvider} from "./patterns/creational/abstract-factory/FactoryPro
 import {Card} from "./patterns/creational/abstract-factory/Card";
 import {PaymentMethod} from "./patterns/creational/abstract-factory/PaymentMethod";
 import {Card as CardB, CardBuilder} from "./patterns/creational/builder/Card";
+import {PrototypeFactory} from "./patterns/creational/prototype/PrototypeFactory";
+import {PrototypeCard} from "./patterns/creational/prototype/PrototypeCard";
 
 function factoryMethod() : void {
     let payment : Payment = PaymentFactory.buildPayment(TypePayment.CARD);
@@ -33,6 +35,16 @@ function builderPattern() : void {
     console.log(card1)
 }
 
+function prototypePattern() : void {
+    PrototypeFactory.loadCard();
+    let visa : PrototypeCard = PrototypeFactory.getInstance(PrototypeFactory.CardType.VISA);
+    visa.getCard();
+
+    let amex : PrototypeCard = PrototypeFactory.getInstance(PrototypeFactory.CardType.AMEX);
+    amex.getCard();
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
-builderPattern();
+//builderPattern();
+prototypePattern();
