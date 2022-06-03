@@ -9,7 +9,10 @@ import {Card as CardB, CardBuilder} from "./patterns/creational/builder/Card";
 import {PrototypeFactory} from "./patterns/creational/prototype/PrototypeFactory";
 import {PrototypeCard} from "./patterns/creational/prototype/PrototypeCard";
 import {Card as CardS} from "./patterns/creational/singleton/Card";
+import {CreditCard} from "./patterns/behavioral/chain-of-responsability/CreditCard";
 
+// CREATION
+// <===================================================================================================================>
 function factoryMethod() : void {
     let payment : Payment = PaymentFactory.buildPayment(TypePayment.CARD);
     payment.doPayment();
@@ -50,9 +53,17 @@ function singleton(): void {
     card.cardNumber = '2314 1234 5423 3211';
     console.log(card.cardNumber);
 }
+// COMPORTMENT
+// <===================================================================================================================>
+function chainOfResponsability(): void {
+    let creditCard: CreditCard = new CreditCard();
+    creditCard.creditCardRequest(60000);
+}
 
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
 //prototypePattern();
-singleton();
+//singleton();
+
+chainOfResponsability();
