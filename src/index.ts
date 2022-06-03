@@ -8,6 +8,7 @@ import {PaymentMethod} from "./patterns/creational/abstract-factory/PaymentMetho
 import {Card as CardB, CardBuilder} from "./patterns/creational/builder/Card";
 import {PrototypeFactory} from "./patterns/creational/prototype/PrototypeFactory";
 import {PrototypeCard} from "./patterns/creational/prototype/PrototypeCard";
+import {Card as CardS} from "./patterns/creational/singleton/Card";
 
 function factoryMethod() : void {
     let payment : Payment = PaymentFactory.buildPayment(TypePayment.CARD);
@@ -44,7 +45,14 @@ function prototypePattern() : void {
     amex.getCard();
 }
 
+function singleton(): void {
+    let card = CardS.getInstance();
+    card.cardNumber = '2314 1234 5423 3211';
+    console.log(card.cardNumber);
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
-prototypePattern();
+//prototypePattern();
+singleton();
