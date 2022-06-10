@@ -10,6 +10,10 @@ import {PrototypeFactory} from "./patterns/creational/prototype/PrototypeFactory
 import {PrototypeCard} from "./patterns/creational/prototype/PrototypeCard";
 import {Card as CardS} from "./patterns/creational/singleton/Card";
 import {CreditCard} from "./patterns/behavioral/chain-of-responsability/CreditCard";
+import {CreditCard as CreditCardC} from "./patterns/behavioral/command/CreditCard";
+import {CreditCardInvoker} from "./patterns/behavioral/command/CreditCardInvoker";
+import {CreditCardActivateCommand} from "./patterns/behavioral/command/CreditCardActivateCommand";
+import {CreditCardDeactivateCommand} from "./patterns/behavioral/command/CreditCardDeactivateCommand";
 
 // CREATION
 // <===================================================================================================================>
@@ -60,10 +64,23 @@ function chainOfResponsability(): void {
     creditCard.creditCardRequest(60000);
 }
 
+function command(): void {
+    let creditCard: CreditCardC = new CreditCardC();
+    let creditCardDeactivate: CreditCardC = new CreditCardC();
+    let invoker: CreditCardInvoker = new CreditCardInvoker();
+
+    invoker.command = new CreditCardActivateCommand(creditCard);
+    invoker.run();
+    console.log('----------------------------------------------');
+    invoker.command = new CreditCardDeactivateCommand(creditCardDeactivate);
+    invoker.run();
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
 //prototypePattern();
 //singleton();
 
-chainOfResponsability();
+//chainOfResponsability();
+command();
