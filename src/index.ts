@@ -1,7 +1,7 @@
 import {PaymentFactory} from "./patterns/creational/factory/PaymentFactory";
 import {Payment} from "./patterns/creational/factory/Payment";
 import {TypePayment} from "./patterns/creational/factory/TypePayment";
-import { AbstractFactory } from "./patterns/creational/abstract-factory/AbstractFactory";
+import {AbstractFactory} from "./patterns/creational/abstract-factory/AbstractFactory";
 import {FactoryProvider} from "./patterns/creational/abstract-factory/FactoryProvider";
 import {Card} from "./patterns/creational/abstract-factory/Card";
 import {PaymentMethod} from "./patterns/creational/abstract-factory/PaymentMethod";
@@ -14,13 +14,17 @@ import {CreditCard as CreditCardC} from "./patterns/behavioral/command/CreditCar
 import {CreditCardInvoker} from "./patterns/behavioral/command/CreditCardInvoker";
 import {CreditCardActivateCommand} from "./patterns/behavioral/command/CreditCardActivateCommand";
 import {CreditCardDeactivateCommand} from "./patterns/behavioral/command/CreditCardDeactivateCommand";
-import {Mediator} from "./patterns/behavioral/mediator/Mediator";
 import {ConcreteMediator} from "./patterns/behavioral/mediator/ConcreteMediator";
 import {ConcreteCollege1} from "./patterns/behavioral/mediator/ConcreteCollege1";
 import {ConcreteCollege2} from "./patterns/behavioral/mediator/ConcreteCollege2";
 import {Caretaker} from "./patterns/behavioral/memento/Caretaker";
 import {Article} from "./patterns/behavioral/memento/Article";
 import {ArticleMemento} from "./patterns/behavioral/memento/ArticleMemento";
+import {Car} from "./patterns/behavioral/observer/Car";
+import {Pedestrian} from "./patterns/behavioral/observer/Pedestrian";
+import {MessagePublisher} from "./patterns/behavioral/observer/MessagePublisher";
+import {Semaphore} from "./patterns/behavioral/observer/Semaphore";
+import {SemaphoreStatus} from "./patterns/behavioral/observer/SemaphoreStatus";
 
 // CREATION
 // <===================================================================================================================>
@@ -113,6 +117,17 @@ function memento(): void {
     console.log(article.text);
 }
 
+function observer(): void {
+    const car: Car = new Car();
+    const pedestrian: Pedestrian = new Pedestrian();
+    const messagePublisher: MessagePublisher = new MessagePublisher();
+    messagePublisher.attach(car);
+    messagePublisher.attach(pedestrian);
+
+    messagePublisher.notifyUpdate(new Semaphore(SemaphoreStatus.RED));
+    setTimeout(() => {messagePublisher.notifyUpdate(new Semaphore(SemaphoreStatus.GREEN))}, 2000);
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -122,4 +137,5 @@ function memento(): void {
 //chainOfResponsability();
 //command();
 //mediator();
-memento();
+//memento();
+observer();
