@@ -31,6 +31,9 @@ import {SilentState} from "./patterns/behavioral/state/SilentState";
 import {Context} from "./patterns/behavioral/strategy/Context";
 import {LowerStrategyTextFormatter} from "./patterns/behavioral/strategy/LowerStrategyTextFormatter";
 import {CapitalStrategyTextFormatter} from "./patterns/behavioral/strategy/CapitalStrategyTextFormatter";
+import {Payment as TPayment} from "./patterns/behavioral/template-method/Payment";
+import {Paypal} from "./patterns/behavioral/template-method/Paypal";
+import {MercadoPago} from "./patterns/behavioral/template-method/MercadoPago";
 
 // CREATION
 // <===================================================================================================================>
@@ -150,6 +153,13 @@ function strategy(): void {
     context.publishText('Este texto sera convertido a MINUSCULAS.');
 }
 
+function templateMethod(): void {
+    const paypalPayment: TPayment = new Paypal();
+    const mpPayment: TPayment = new MercadoPago();
+    paypalPayment.makePayment();
+    mpPayment.makePayment();
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -162,4 +172,5 @@ function strategy(): void {
 //memento();
 //observer();
 //state();
-strategy();
+//strategy();
+templateMethod();
