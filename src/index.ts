@@ -28,6 +28,9 @@ import {SemaphoreStatus} from "./patterns/behavioral/observer/SemaphoreStatus";
 import {MobileAlertStateContext} from "./patterns/behavioral/state/MobileAlertStateContext";
 import {VibrationState} from "./patterns/behavioral/state/VibrationState";
 import {SilentState} from "./patterns/behavioral/state/SilentState";
+import {Context} from "./patterns/behavioral/strategy/Context";
+import {LowerStrategyTextFormatter} from "./patterns/behavioral/strategy/LowerStrategyTextFormatter";
+import {CapitalStrategyTextFormatter} from "./patterns/behavioral/strategy/CapitalStrategyTextFormatter";
 
 // CREATION
 // <===================================================================================================================>
@@ -140,6 +143,13 @@ function state(): void {
     mobileAlertStateContext.alert();
 }
 
+function strategy(): void {
+    let context = new Context(new CapitalStrategyTextFormatter());
+    context.publishText('Este texto sera convertido a mayusculas.');
+    context = new Context(new LowerStrategyTextFormatter());
+    context.publishText('Este texto sera convertido a MINUSCULAS.');
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -151,4 +161,5 @@ function state(): void {
 //mediator();
 //memento();
 //observer();
-state();
+//state();
+strategy();
