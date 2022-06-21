@@ -25,6 +25,9 @@ import {Pedestrian} from "./patterns/behavioral/observer/Pedestrian";
 import {MessagePublisher} from "./patterns/behavioral/observer/MessagePublisher";
 import {Semaphore} from "./patterns/behavioral/observer/Semaphore";
 import {SemaphoreStatus} from "./patterns/behavioral/observer/SemaphoreStatus";
+import {MobileAlertStateContext} from "./patterns/behavioral/state/MobileAlertStateContext";
+import {VibrationState} from "./patterns/behavioral/state/VibrationState";
+import {SilentState} from "./patterns/behavioral/state/SilentState";
 
 // CREATION
 // <===================================================================================================================>
@@ -128,6 +131,15 @@ function observer(): void {
     setTimeout(() => {messagePublisher.notifyUpdate(new Semaphore(SemaphoreStatus.GREEN))}, 2000);
 }
 
+function state(): void {
+    let mobileAlertStateContext: MobileAlertStateContext = new MobileAlertStateContext();
+    mobileAlertStateContext.alert();
+    mobileAlertStateContext.currentState = new VibrationState();
+    mobileAlertStateContext.alert();
+    mobileAlertStateContext.currentState = new SilentState();
+    mobileAlertStateContext.alert();
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -138,4 +150,5 @@ function observer(): void {
 //command();
 //mediator();
 //memento();
-observer();
+//observer();
+state();
