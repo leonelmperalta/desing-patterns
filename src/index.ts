@@ -14,6 +14,13 @@ import {CreditCard as CreditCardC} from "./patterns/behavioral/command/CreditCar
 import {CreditCardInvoker} from "./patterns/behavioral/command/CreditCardInvoker";
 import {CreditCardActivateCommand} from "./patterns/behavioral/command/CreditCardActivateCommand";
 import {CreditCardDeactivateCommand} from "./patterns/behavioral/command/CreditCardDeactivateCommand";
+import {Mediator} from "./patterns/behavioral/mediator/Mediator";
+import {ConcreteMediator} from "./patterns/behavioral/mediator/ConcreteMediator";
+import {ConcreteCollege1} from "./patterns/behavioral/mediator/ConcreteCollege1";
+import {ConcreteCollege2} from "./patterns/behavioral/mediator/ConcreteCollege2";
+import {Caretaker} from "./patterns/behavioral/memento/Caretaker";
+import {Article} from "./patterns/behavioral/memento/Article";
+import {ArticleMemento} from "./patterns/behavioral/memento/ArticleMemento";
 
 // CREATION
 // <===================================================================================================================>
@@ -76,6 +83,36 @@ function command(): void {
     invoker.run();
 }
 
+function mediator(): void {
+    let mediator: ConcreteMediator = new ConcreteMediator();
+    let user1: ConcreteCollege1 = new ConcreteCollege1(mediator);
+    let user2: ConcreteCollege2 = new ConcreteCollege2(mediator);
+
+    mediator.user1 = user1;
+    mediator.user2 = user2;
+    console.log(`college1: ${mediator.user1}, college2: ${mediator.user2}`);
+    user1.send("Hola soy user 1");
+    user2.send("Hola user1, soy user 2");
+}
+
+function memento(): void {
+    let caretaker: Caretaker = new Caretaker();
+    let article: Article = new Article('Alberto', 'Memento es un patron interesante.');
+    console.log(article.text);
+    caretaker.addMemento(article.createMemento());
+    article.text = article.text + 'Hay que conocerlo si o si.';
+    console.log(article.text);
+    caretaker.addMemento(article.createMemento());
+
+    article.text = article.text + ' BORRAR ESTO';
+    console.log(article.text);
+    let articleMemento: ArticleMemento = caretaker.getMemento(0);
+    let articleMemento1: ArticleMemento = caretaker.getMemento(1);
+
+    article.restoreMemento(articleMemento1);
+    console.log(article.text);
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -83,4 +120,6 @@ function command(): void {
 //singleton();
 
 //chainOfResponsability();
-command();
+//command();
+//mediator();
+memento();
