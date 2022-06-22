@@ -55,6 +55,10 @@ import {Black} from "./patterns/structural/decorator/Black";
 import {InternationalPaymentDecorator} from "./patterns/structural/decorator/InternationalPaymentDecorator";
 import {SecureDecorator} from "./patterns/structural/decorator/SecureDecorator";
 import {CreditMarket} from "./patterns/structural/facade/CreditMarket";
+import {Enemy} from "./patterns/structural/flyweight/Enemy";
+import {EnemyFactory} from "./patterns/structural/flyweight/EnemyFactory";
+import {EnemyType} from "./patterns/structural/flyweight/EnemyType";
+import {WeaponType} from "./patterns/structural/flyweight/WeaponType";
 // CREATION
 // <===================================================================================================================>
 function factoryMethod() : void {
@@ -234,6 +238,21 @@ function facade(): void {
     creditMarket.showCreditGold();
     creditMarket.showCreditSilver();
 }
+
+function getRandomInt(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function flyweight(): void {
+    const enemyTypes = [EnemyType.PRIVATE, EnemyType.LIEUTENANT];
+    const weaponTypes = [WeaponType.RIFLE, WeaponType.HANDGUN, WeaponType.SHOTGUN, WeaponType.MACHINE_GUN, WeaponType.BAZOOKA];
+
+    for (let i = 0; i < 15; i++) {
+        let enemy: Enemy = EnemyFactory.getEnemy(getRandomInt(0, 2));
+        enemy.setWeapon(weaponTypes[getRandomInt(0, weaponTypes.length + 1)]);
+        enemy.lifePoints();
+    }
+}
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -254,4 +273,5 @@ function facade(): void {
 //bridge();
 //composite();
 //decorator();
-facade();
+//facade();
+flyweight();
