@@ -54,6 +54,7 @@ import {Gold} from "./patterns/structural/decorator/Gold";
 import {Black} from "./patterns/structural/decorator/Black";
 import {InternationalPaymentDecorator} from "./patterns/structural/decorator/InternationalPaymentDecorator";
 import {SecureDecorator} from "./patterns/structural/decorator/SecureDecorator";
+import {CreditMarket} from "./patterns/structural/facade/CreditMarket";
 // CREATION
 // <===================================================================================================================>
 function factoryMethod() : void {
@@ -226,6 +227,13 @@ function decorator(): void {
     console.log('----Tarjeta gold2 con configuracion----');
     goldSecureAndInternational.showCredit();
 }
+
+function facade(): void {
+    const creditMarket: CreditMarket = new CreditMarket();
+    creditMarket.showCreditBlack();
+    creditMarket.showCreditGold();
+    creditMarket.showCreditSilver();
+}
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -245,4 +253,5 @@ function decorator(): void {
 //adapter();
 //bridge();
 //composite();
-decorator();
+//decorator();
+facade();
