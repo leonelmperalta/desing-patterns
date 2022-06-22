@@ -41,6 +41,10 @@ import {BlackCreditCardVisitor} from "./patterns/behavioral/visitor/BlackCreditC
 import {ClassicCreditCardVisitor} from "./patterns/behavioral/visitor/ClassicCreditCardVisitor";
 import {CreditCard as ACreditCard} from "./patterns/structural/adapter/CreditCard";
 import {CreditCardType} from "./patterns/structural/adapter/CreditCardType";
+import {CreditCard as BCreditCard} from "./patterns/structural/bridge/CreditCard";
+import {ClassicCreditCard} from "./patterns/structural/bridge/ClassicCreditCard";
+import {UnsecureCreditCard} from "./patterns/structural/bridge/UnsecureCreditCard";
+import {SecureCreditCard} from "./patterns/structural/bridge/SecureCreditCard";
 // CREATION
 // <===================================================================================================================>
 function factoryMethod() : void {
@@ -181,7 +185,12 @@ function adapter(): void {
     creditCard.pay(CreditCardType.GOLD);
     creditCard.pay(CreditCardType.BLACK);
 }
-
+function bridge(): void {
+    let classic : BCreditCard = new ClassicCreditCard(new UnsecureCreditCard());
+    classic.makePayment();
+    classic = new ClassicCreditCard(new SecureCreditCard());
+    classic.makePayment();
+}
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -198,4 +207,5 @@ function adapter(): void {
 //templateMethod();
 //visitor();
 
-adapter();
+//adapter();
+bridge();
