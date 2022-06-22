@@ -45,6 +45,10 @@ import {CreditCard as BCreditCard} from "./patterns/structural/bridge/CreditCard
 import {ClassicCreditCard} from "./patterns/structural/bridge/ClassicCreditCard";
 import {UnsecureCreditCard} from "./patterns/structural/bridge/UnsecureCreditCard";
 import {SecureCreditCard} from "./patterns/structural/bridge/SecureCreditCard";
+import {AccountComponent} from "./patterns/structural/composite/AccountComponent";
+import {CurrentAccount} from "./patterns/structural/composite/CurrentAccount";
+import {SavingAccount} from "./patterns/structural/composite/SavingAccount";
+import {AccountComposite} from "./patterns/structural/composite/AccountComposite";
 // CREATION
 // <===================================================================================================================>
 function factoryMethod() : void {
@@ -191,6 +195,16 @@ function bridge(): void {
     classic = new ClassicCreditCard(new SecureCreditCard());
     classic.makePayment();
 }
+
+function composite(): void {
+    const currentAccount: AccountComponent = new CurrentAccount(50000, "John Doe");
+    const savingsAccount: AccountComponent = new SavingAccount(150000, "Jane Doe");
+    const accountComposite: AccountComposite = new AccountComposite();
+    accountComposite.addAccount(currentAccount);
+    accountComposite.addAccount(savingsAccount);
+    accountComposite.showAccountName();
+    console.log(`Saldo total: ${accountComposite.getAmount()}`);
+}
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -208,4 +222,5 @@ function bridge(): void {
 //visitor();
 
 //adapter();
-bridge();
+//bridge();
+composite();
