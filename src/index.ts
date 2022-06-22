@@ -49,6 +49,11 @@ import {AccountComponent} from "./patterns/structural/composite/AccountComponent
 import {CurrentAccount} from "./patterns/structural/composite/CurrentAccount";
 import {SavingAccount} from "./patterns/structural/composite/SavingAccount";
 import {AccountComposite} from "./patterns/structural/composite/AccountComposite";
+import {Credit} from "./patterns/structural/decorator/Credit";
+import {Gold} from "./patterns/structural/decorator/Gold";
+import {Black} from "./patterns/structural/decorator/Black";
+import {InternationalPaymentDecorator} from "./patterns/structural/decorator/InternationalPaymentDecorator";
+import {SecureDecorator} from "./patterns/structural/decorator/SecureDecorator";
 // CREATION
 // <===================================================================================================================>
 function factoryMethod() : void {
@@ -205,6 +210,22 @@ function composite(): void {
     accountComposite.showAccountName();
     console.log(`Saldo total: ${accountComposite.getAmount()}`);
 }
+
+function decorator(): void {
+    const gold: Credit = new Gold();
+    let blackInternationalPayment: Credit = new Black();
+    blackInternationalPayment = new InternationalPaymentDecorator(blackInternationalPayment);
+    let goldSecureAndInternational: Credit = new Gold();
+    goldSecureAndInternational = new InternationalPaymentDecorator(goldSecureAndInternational);
+    goldSecureAndInternational = new SecureDecorator(goldSecureAndInternational);
+
+    console.log('----Tarjeta gold con configuracion----');
+    gold.showCredit();
+    console.log('----Tarjeta black con configuracion----');
+    blackInternationalPayment.showCredit();
+    console.log('----Tarjeta gold2 con configuracion----');
+    goldSecureAndInternational.showCredit();
+}
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -223,4 +244,5 @@ function composite(): void {
 
 //adapter();
 //bridge();
-composite();
+//composite();
+decorator();
