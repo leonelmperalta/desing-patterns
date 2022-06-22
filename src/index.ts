@@ -39,7 +39,8 @@ import {GasolineOffer} from "./patterns/behavioral/visitor/GasolineOffer";
 import {FlightOffer} from "./patterns/behavioral/visitor/FlightOffer";
 import {BlackCreditCardVisitor} from "./patterns/behavioral/visitor/BlackCreditCardVisitor";
 import {ClassicCreditCardVisitor} from "./patterns/behavioral/visitor/ClassicCreditCardVisitor";
-
+import {CreditCard as ACreditCard} from "./patterns/structural/adapter/CreditCard";
+import {CreditCardType} from "./patterns/structural/adapter/CreditCardType";
 // CREATION
 // <===================================================================================================================>
 function factoryMethod() : void {
@@ -172,6 +173,14 @@ function visitor(): void {
     gasolineOffer.accept(new BlackCreditCardVisitor());
     flightOffer.accept(new ClassicCreditCardVisitor());
 }
+// STRUCTURAL
+// <===================================================================================================================>
+function adapter(): void {
+    const creditCard = new ACreditCard();
+    creditCard.pay(CreditCardType.CLASSIC);
+    creditCard.pay(CreditCardType.GOLD);
+    creditCard.pay(CreditCardType.BLACK);
+}
 
 //factoryMethod();
 //abstractFactoryMethod();
@@ -187,4 +196,6 @@ function visitor(): void {
 //state();
 //strategy();
 //templateMethod();
-visitor();
+//visitor();
+
+adapter();
