@@ -34,6 +34,11 @@ import {CapitalStrategyTextFormatter} from "./patterns/behavioral/strategy/Capit
 import {Payment as TPayment} from "./patterns/behavioral/template-method/Payment";
 import {Paypal} from "./patterns/behavioral/template-method/Paypal";
 import {MercadoPago} from "./patterns/behavioral/template-method/MercadoPago";
+import {ElementOffer} from "./patterns/behavioral/visitor/ElementOffer";
+import {GasolineOffer} from "./patterns/behavioral/visitor/GasolineOffer";
+import {FlightOffer} from "./patterns/behavioral/visitor/FlightOffer";
+import {BlackCreditCardVisitor} from "./patterns/behavioral/visitor/BlackCreditCardVisitor";
+import {ClassicCreditCardVisitor} from "./patterns/behavioral/visitor/ClassicCreditCardVisitor";
 
 // CREATION
 // <===================================================================================================================>
@@ -160,6 +165,14 @@ function templateMethod(): void {
     mpPayment.makePayment();
 }
 
+function visitor(): void {
+    let gasolineOffer: ElementOffer = new GasolineOffer();
+    let flightOffer: ElementOffer = new FlightOffer();
+
+    gasolineOffer.accept(new BlackCreditCardVisitor());
+    flightOffer.accept(new ClassicCreditCardVisitor());
+}
+
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -173,4 +186,5 @@ function templateMethod(): void {
 //observer();
 //state();
 //strategy();
-templateMethod();
+//templateMethod();
+visitor();
