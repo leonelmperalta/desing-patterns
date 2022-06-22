@@ -59,6 +59,7 @@ import {Enemy} from "./patterns/structural/flyweight/Enemy";
 import {EnemyFactory} from "./patterns/structural/flyweight/EnemyFactory";
 import {EnemyType} from "./patterns/structural/flyweight/EnemyType";
 import {WeaponType} from "./patterns/structural/flyweight/WeaponType";
+import {InternetProxy} from "./patterns/structural/proxy/InternetProxy";
 // CREATION
 // <===================================================================================================================>
 function factoryMethod() : void {
@@ -253,6 +254,23 @@ function flyweight(): void {
         enemy.lifePoints();
     }
 }
+
+function proxy(): void {
+    const proxy = new InternetProxy();
+    try {
+        proxy.connectTo("www.twitter.com");
+    } catch (e) {
+        console.log(e);
+    }
+
+    try {
+        proxy.connectTo("www.udemy.com");
+    } catch (e) {
+        console.log(e);
+    }
+
+
+}
 //factoryMethod();
 //abstractFactoryMethod();
 //builderPattern();
@@ -274,4 +292,5 @@ function flyweight(): void {
 //composite();
 //decorator();
 //facade();
-flyweight();
+//flyweight();
+proxy();
